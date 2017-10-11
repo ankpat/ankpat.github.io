@@ -1,0 +1,195 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>NeuralNetwork.Layer &#8212; Neural Network 1.0 documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for NeuralNetwork.Layer</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="sd">&quot;&quot;&quot;Neural Network Layer of Perceptrons.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="k">import</span> <span class="n">List</span>
+
+<span class="kn">from</span> <span class="nn">.Perceptron</span> <span class="k">import</span> <span class="n">Perceptron</span>
+<span class="kn">from</span> <span class="nn">.Types</span> <span class="k">import</span> <span class="n">WEIGHTS</span><span class="p">,</span> <span class="n">INPUTS</span>
+
+<span class="n">LAYER</span> <span class="o">=</span> <span class="n">List</span><span class="p">[</span><span class="n">Perceptron</span><span class="p">]</span>
+
+
+<div class="viewcode-block" id="Layer"><a class="viewcode-back" href="../../NeuralNetwork.html#NeuralNetwork.Layer.Layer">[docs]</a><span class="k">class</span> <span class="nc">Layer</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A Layer consists of one or more Perceptrons that are all given the same set of inputs.</span>
+<span class="sd">    The outputs of all Perceptrons in the layer are returned as a single vector.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number_of_nodes</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">number_of_inputs</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">weights</span><span class="p">:</span> <span class="n">WEIGHTS</span><span class="p">,</span> <span class="n">bias</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a new Neural Network Layer</span>
+
+<span class="sd">        Arg:</span>
+<span class="sd">            number_of_nodes (int): Indicate number of nodes in the node layer</span>
+<span class="sd">            number_of_inputs (int): Used soley for sanity checking length of weights list</span>
+<span class="sd">            weights (WEIGHTS): A list of weights for each input</span>
+<span class="sd">            bias (float): A constant value added to the the weighted sum of inputs</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">number_of_nodes</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="k">if</span> <span class="n">number_of_inputs</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">weights</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Number of inputs and number of weights do not match!&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">number_of_inputs</span> <span class="o">=</span> <span class="n">number_of_inputs</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span> <span class="o">=</span> <span class="p">[</span><span class="n">Perceptron</span><span class="p">(</span><span class="n">number_of_inputs</span><span class="p">,</span> <span class="n">weights</span><span class="p">,</span> <span class="n">bias</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number_of_nodes</span><span class="p">)]</span>
+
+<div class="viewcode-block" id="Layer.make_layer"><a class="viewcode-back" href="../../NeuralNetwork.html#NeuralNetwork.Layer.Layer.make_layer">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">make_layer</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">perceptrons</span><span class="p">:</span> <span class="n">LAYER</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a new layer from existing Perceptrons</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            perceptrons (LAYER): A list defining all perceptrons within this layer</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Layer: An initialized Layer object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">layer_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">perceptrons</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">layer_size</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Cannot make an empty layer&quot;</span><span class="p">)</span>
+        <span class="n">inputs</span> <span class="o">=</span> <span class="n">perceptrons</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">number_of_inputs</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="n">perceptron</span><span class="o">.</span><span class="n">number_of_inputs</span> <span class="o">==</span> <span class="n">inputs</span> <span class="k">for</span> <span class="n">perceptron</span> <span class="ow">in</span> <span class="n">perceptrons</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;All perceptrons in a layer must take the same number of inputs&quot;</span><span class="p">)</span>
+
+        <span class="n">layer</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">[],</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">layer</span><span class="o">.</span><span class="n">number_of_inputs</span> <span class="o">=</span> <span class="n">inputs</span>
+        <span class="n">layer</span><span class="o">.</span><span class="n">nodes</span> <span class="o">=</span> <span class="n">perceptrons</span>
+
+        <span class="k">return</span> <span class="n">layer</span></div>
+
+
+    <span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a node from this layer</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            index (int): Index into layer nodes</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Returns the node at offset index from the start of the node list</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+
+<div class="viewcode-block" id="Layer.feed"><a class="viewcode-back" href="../../NeuralNetwork.html#NeuralNetwork.Layer.Layer.feed">[docs]</a>    <span class="k">def</span> <span class="nf">feed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">:</span> <span class="n">INPUTS</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Feed inputs through the layer and return list of outputs</span>
+
+<span class="sd">        Input are fed to all nodes in the layer.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            inputs (INPUTS): A list of input values</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List[float] A list containing the output of each node in this layer</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_of_inputs</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Number of inputs and number of weights do not match!&quot;</span><span class="p">)</span>
+
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">.</span><span class="n">activation</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">results</span></div>
+
+    <span class="k">def</span> <span class="nf">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nodes</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../index.html">Neural Network</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=ankpat&repo=jhu&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../homework5.html">Homework 5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../NeuralNetwork.html">NeuralNetwork Package</a></li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2017, Ankit Patel.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
