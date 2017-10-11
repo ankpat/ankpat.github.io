@@ -73,7 +73,7 @@ parameter.</p>
 \[v = \frac{1}{1+e^{-y}}\]</div>
 <dl class="class">
 <dt id="NeuralNetwork.Perceptron.Perceptron">
-<em class="property">class </em><code class="descclassname">NeuralNetwork.Perceptron.</code><code class="descname">Perceptron</code><span class="sig-paren">(</span><em>number_of_inputs: int, weights: typing.List[float], bias: float</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/NeuralNetwork/Perceptron.html#Perceptron"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NeuralNetwork.Perceptron.Perceptron" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">NeuralNetwork.Perceptron.</code><code class="descname">Perceptron</code><span class="sig-paren">(</span><em>number_of_inputs: int, weights: typing.List[float], bias: float</em><span class="sig-paren">)</span><a class="headerlink" href="#NeuralNetwork.Perceptron.Perceptron" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>A perceptron takes inputs and computes an activity value based on the inputs
 and specified weights and bias.</p>
@@ -92,7 +92,7 @@ and specified weights and bias.</p>
 </table>
 <dl class="method">
 <dt id="NeuralNetwork.Perceptron.Perceptron.activation">
-<code class="descname">activation</code><span class="sig-paren">(</span><em>inputs: typing.List[float]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/NeuralNetwork/Perceptron.html#Perceptron.activation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NeuralNetwork.Perceptron.Perceptron.activation" title="Permalink to this definition">¶</a></dt>
+<code class="descname">activation</code><span class="sig-paren">(</span><em>inputs: typing.List[float]</em><span class="sig-paren">)</span><a class="headerlink" href="#NeuralNetwork.Perceptron.Perceptron.activation" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the value of the activation function</p>
 <p>The activation function is computed as the sigmoid function with the activity
 function as its parameter.</p>
@@ -112,7 +112,7 @@ function as its parameter.</p>
 
 <dl class="method">
 <dt id="NeuralNetwork.Perceptron.Perceptron.activity">
-<code class="descname">activity</code><span class="sig-paren">(</span><em>inputs: typing.List[float]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/NeuralNetwork/Perceptron.html#Perceptron.activity"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NeuralNetwork.Perceptron.Perceptron.activity" title="Permalink to this definition">¶</a></dt>
+<code class="descname">activity</code><span class="sig-paren">(</span><em>inputs: typing.List[float]</em><span class="sig-paren">)</span><a class="headerlink" href="#NeuralNetwork.Perceptron.Perceptron.activity" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the value of the activity function.</p>
 <p>The activity function is computed as the weighted sum of all inputs plus the bias</p>
 <div class="math">
@@ -131,7 +131,7 @@ function as its parameter.</p>
 
 <dl class="method">
 <dt id="NeuralNetwork.Perceptron.Perceptron.adjust_weights">
-<code class="descname">adjust_weights</code><span class="sig-paren">(</span><em>delta: typing.List[float]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/NeuralNetwork/Perceptron.html#Perceptron.adjust_weights"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NeuralNetwork.Perceptron.Perceptron.adjust_weights" title="Permalink to this definition">¶</a></dt>
+<code class="descname">adjust_weights</code><span class="sig-paren">(</span><em>delta: typing.List[float]</em><span class="sig-paren">)</span><a class="headerlink" href="#NeuralNetwork.Perceptron.Perceptron.adjust_weights" title="Permalink to this definition">¶</a></dt>
 <dd><p>Adjust weights of Perceptron by some given factor</p>
 <p>Given a list of deltas, <span class="math">\(\{\delta_1, \delta_2, \ldots, \delta_m\}, m \geq n\)</span>, the new
 weights are calculated as <span class="math">\(w_i + \delta_i\)</span>. If m = n+1, then the bias is updated.</p>
@@ -175,13 +175,13 @@ update the bias.</td>
 <p>Neural Network Layer of Perceptrons.</p>
 <dl class="class">
 <dt id="NeuralNetwork.Layer.Layer">
-<em class="property">class </em><code class="descclassname">NeuralNetwork.Layer.</code><code class="descname">Layer</code><span class="sig-paren">(</span><em>number_of_nodes: int, number_of_inputs: int, weights: typing.List[float], bias: float</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/NeuralNetwork/Layer.html#Layer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NeuralNetwork.Layer.Layer" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">NeuralNetwork.Layer.</code><code class="descname">Layer</code><span class="sig-paren">(</span><em>number_of_nodes: int, number_of_inputs: int, weights: typing.List[float], bias: float</em><span class="sig-paren">)</span><a class="headerlink" href="#NeuralNetwork.Layer.Layer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>A Layer consists of one or more Perceptrons that are all given the same set of inputs.
 The outputs of all Perceptrons in the layer are returned as a single vector.</p>
 <dl class="method">
 <dt id="NeuralNetwork.Layer.Layer.feed">
-<code class="descname">feed</code><span class="sig-paren">(</span><em>inputs: typing.List[float]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/NeuralNetwork/Layer.html#Layer.feed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NeuralNetwork.Layer.Layer.feed" title="Permalink to this definition">¶</a></dt>
+<code class="descname">feed</code><span class="sig-paren">(</span><em>inputs: typing.List[float]</em><span class="sig-paren">)</span><a class="headerlink" href="#NeuralNetwork.Layer.Layer.feed" title="Permalink to this definition">¶</a></dt>
 <dd><p>Feed inputs through the layer and return list of outputs</p>
 <p>Input are fed to all nodes in the layer.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -198,7 +198,7 @@ The outputs of all Perceptrons in the layer are returned as a single vector.</p>
 
 <dl class="classmethod">
 <dt id="NeuralNetwork.Layer.Layer.make_layer">
-<em class="property">classmethod </em><code class="descname">make_layer</code><span class="sig-paren">(</span><em>perceptrons: typing.List[NeuralNetwork.Perceptron.Perceptron]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/NeuralNetwork/Layer.html#Layer.make_layer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NeuralNetwork.Layer.Layer.make_layer" title="Permalink to this definition">¶</a></dt>
+<em class="property">classmethod </em><code class="descname">make_layer</code><span class="sig-paren">(</span><em>perceptrons: typing.List[NeuralNetwork.Perceptron.Perceptron]</em><span class="sig-paren">)</span><a class="headerlink" href="#NeuralNetwork.Layer.Layer.make_layer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Create a new layer from existing Perceptrons</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -222,7 +222,7 @@ The outputs of all Perceptrons in the layer are returned as a single vector.</p>
 <p>Neural Network Implementation</p>
 <dl class="class">
 <dt id="NeuralNetwork.Network.Network">
-<em class="property">class </em><code class="descclassname">NeuralNetwork.Network.</code><code class="descname">Network</code><span class="sig-paren">(</span><em>layers: typing.List[NeuralNetwork.Layer.Layer]</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/NeuralNetwork/Network.html#Network"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NeuralNetwork.Network.Network" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">NeuralNetwork.Network.</code><code class="descname">Network</code><span class="sig-paren">(</span><em>layers: typing.List[NeuralNetwork.Layer.Layer]</em><span class="sig-paren">)</span><a class="headerlink" href="#NeuralNetwork.Network.Network" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
 <p>A Neural Network consists of one or more Layer objects containing Perceptrons. A Neural
 Network receives one or more inputs and produces a single output.
@@ -231,7 +231,7 @@ attempts to find the global minimum of the Mean Squared Error.</p>
 <p>Mathematically, this Neural Network is a mapping <span class="math">\(\mathbb{R}^n \rightarrow \mathbb{R}\)</span>.</p>
 <dl class="method">
 <dt id="NeuralNetwork.Network.Network.feed">
-<code class="descname">feed</code><span class="sig-paren">(</span><em>inputs: typing.List[float], desired: typing.Union[float, NoneType] = None</em><span class="sig-paren">)</span> &#x2192; float<a class="reference internal" href="_modules/NeuralNetwork/Network.html#Network.feed"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NeuralNetwork.Network.Network.feed" title="Permalink to this definition">¶</a></dt>
+<code class="descname">feed</code><span class="sig-paren">(</span><em>inputs: typing.List[float], desired: typing.Union[float, NoneType] = None</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#NeuralNetwork.Network.Network.feed" title="Permalink to this definition">¶</a></dt>
 <dd><p>Feed inputs to the network and return single output.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -249,7 +249,7 @@ attempts to find the global minimum of the Mean Squared Error.</p>
 
 <dl class="method">
 <dt id="NeuralNetwork.Network.Network.to_dot">
-<code class="descname">to_dot</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/NeuralNetwork/Network.html#Network.to_dot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NeuralNetwork.Network.Network.to_dot" title="Permalink to this definition">¶</a></dt>
+<code class="descname">to_dot</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#NeuralNetwork.Network.Network.to_dot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return a string representation of this Neural Network in graphviz DOT format</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -265,7 +265,7 @@ attempts to find the global minimum of the Mean Squared Error.</p>
 
 <dl class="method">
 <dt id="NeuralNetwork.Network.Network.train">
-<code class="descname">train</code><span class="sig-paren">(</span><em>inputs: typing.List[float], desired: float, gain_factor: float = 1.0, iterations: int = 15, train_bias=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/NeuralNetwork/Network.html#Network.train"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NeuralNetwork.Network.Network.train" title="Permalink to this definition">¶</a></dt>
+<code class="descname">train</code><span class="sig-paren">(</span><em>inputs: typing.List[float], desired: float, gain_factor: float = 1.0, iterations: int = 15, train_bias=False</em><span class="sig-paren">)</span><a class="headerlink" href="#NeuralNetwork.Network.Network.train" title="Permalink to this definition">¶</a></dt>
 <dd><p>Train a neural network with a single Input/Ouput pair</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -287,7 +287,7 @@ term is shifted each iteration.</li>
 
 <dl class="method">
 <dt id="NeuralNetwork.Network.Network.train_alternating">
-<code class="descname">train_alternating</code><span class="sig-paren">(</span><em>inputs: typing.List[typing.List[float]], desired: typing.List[float], gain_factor: float, iterations: int, train_bias: bool = False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/NeuralNetwork/Network.html#Network.train_alternating"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NeuralNetwork.Network.Network.train_alternating" title="Permalink to this definition">¶</a></dt>
+<code class="descname">train_alternating</code><span class="sig-paren">(</span><em>inputs: typing.List[typing.List[float]], desired: typing.List[float], gain_factor: float, iterations: int, train_bias: bool = False</em><span class="sig-paren">)</span><a class="headerlink" href="#NeuralNetwork.Network.Network.train_alternating" title="Permalink to this definition">¶</a></dt>
 <dd><p>Train a neural network with multiple input/output pairs.</p>
 <p>Alternating training means that the input/output pairs will be used one after the other
 for the specified number of iterations. Given a set of inputs (I1, I2, I3…) and
@@ -313,7 +313,7 @@ term is shifted each iteration.</li>
 
 <dl class="method">
 <dt id="NeuralNetwork.Network.Network.train_round">
-<code class="descname">train_round</code><span class="sig-paren">(</span><em>inputs: typing.List[float], desired: float, gain_factor: float, train_bias: bool = False</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/NeuralNetwork/Network.html#Network.train_round"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NeuralNetwork.Network.Network.train_round" title="Permalink to this definition">¶</a></dt>
+<code class="descname">train_round</code><span class="sig-paren">(</span><em>inputs: typing.List[float], desired: float, gain_factor: float, train_bias: bool = False</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#NeuralNetwork.Network.Network.train_round" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform a single round of the Feed-Forward/Back-Propagation (FFBP) algorithm to train
 a Neural Network.</p>
 <p>The FFBP algorithm as two phases as the name implies.</p>
@@ -353,7 +353,7 @@ term is shifted each iteration.</li>
 
 <dl class="method">
 <dt id="NeuralNetwork.Network.Network.train_successive">
-<code class="descname">train_successive</code><span class="sig-paren">(</span><em>inputs: typing.List[typing.List[float]], desired: typing.List[float], gain_factor: float, iterations: int, train_bias: bool = False</em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/NeuralNetwork/Network.html#Network.train_successive"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#NeuralNetwork.Network.Network.train_successive" title="Permalink to this definition">¶</a></dt>
+<code class="descname">train_successive</code><span class="sig-paren">(</span><em>inputs: typing.List[typing.List[float]], desired: typing.List[float], gain_factor: float, iterations: int, train_bias: bool = False</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#NeuralNetwork.Network.Network.train_successive" title="Permalink to this definition">¶</a></dt>
 <dd><p>Train a neural network with multiple input/output pairs.</p>
 <p>Successive training means that the input/output pairs will be used
 one at a time to train the neural network for the specified number of iterations
