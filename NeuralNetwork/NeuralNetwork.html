@@ -53,7 +53,7 @@ case is made for the final layer with a single Perceptron, as it is typically re
 output layer.</p>
 <p>A Neural Network in this instance consists of one or more Layers. A Neural Network receives one or
 more inputs and produces a single output. A Neural Network can be trained using the Feed-Forward/
-Back-Propagation method which attempts to find the global minimum of the Mean Squared Error.</p>
+Back-Propagation method which attempts to find the global minimum of the Error.</p>
 </div>
 <div class="section" id="module-NeuralNetwork.Perceptron">
 <span id="perceptron"></span><h2>Perceptron<a class="headerlink" href="#module-NeuralNetwork.Perceptron" title="Permalink to this headline">¶</a></h2>
@@ -227,21 +227,32 @@ The outputs of all Perceptrons in the layer are returned as a single vector.</p>
 <p>A Neural Network consists of one or more Layer objects containing Perceptrons. A Neural
 Network receives one or more inputs and produces a single output.
 This implementation can be trained using the Feed-Forward/Back-Propagation method which
-attempts to find the global minimum of the Mean Squared Error.</p>
+attempts to find the global minimum of the Error.</p>
 <p>Mathematically, this Neural Network is a mapping <span class="math">\(\mathbb{R}^n \rightarrow \mathbb{R}\)</span>.</p>
 <dl class="method">
 <dt id="NeuralNetwork.Network.Network.feed">
-<code class="descname">feed</code><span class="sig-paren">(</span><em>inputs: typing.List[float], desired: typing.Union[float, NoneType] = None</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#NeuralNetwork.Network.Network.feed" title="Permalink to this definition">¶</a></dt>
+<code class="descname">feed</code><span class="sig-paren">(</span><em>inputs: typing.List[float], desired: typing.Union[float, NoneType] = None, reST_output: bool = False</em><span class="sig-paren">)</span> &#x2192; float<a class="headerlink" href="#NeuralNetwork.Network.Network.feed" title="Permalink to this definition">¶</a></dt>
 <dd><p>Feed inputs to the network and return single output.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>inputs</strong> (<em>INPUTS</em>) – A list of inputs given to this Neural Network</td>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>inputs</strong> (<em>INPUTS</em>) – A list of inputs given to this Neural Network</li>
+<li><strong>desired</strong> (<em>Union</em><em>[</em><em>float</em><em>, </em><em>None</em><em>]</em>) – An optional value for the desired output.
+This value, if provided will be used to calculate the errors.</li>
+<li><strong>reST_output</strong> (<em>bool</em>) – Flag to specify if reSTructured text output should be printed
+to stdout.</li>
+</ul>
+</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">The final value returned by the output layer.</td>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">The final value returned by the output layer.
+If a value is provided for desired, then the calculated error and Error will be
+returned.</p>
+</td>
 </tr>
-<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">float</td>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">Union[float, Tuple[float, float, float]]</p>
+</td>
 </tr>
 </tbody>
 </table>
@@ -265,7 +276,7 @@ attempts to find the global minimum of the Mean Squared Error.</p>
 
 <dl class="method">
 <dt id="NeuralNetwork.Network.Network.train">
-<code class="descname">train</code><span class="sig-paren">(</span><em>inputs: typing.List[float], desired: float, gain_factor: float = 1.0, iterations: int = 15, train_bias=False</em><span class="sig-paren">)</span><a class="headerlink" href="#NeuralNetwork.Network.Network.train" title="Permalink to this definition">¶</a></dt>
+<code class="descname">train</code><span class="sig-paren">(</span><em>inputs: typing.List[float], desired: float, gain_factor: float = 1.0, iterations: int = 15, train_bias=False, reST_output: bool = False</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#NeuralNetwork.Network.Network.train" title="Permalink to this definition">¶</a></dt>
 <dd><p>Train a neural network with a single Input/Ouput pair</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -278,6 +289,8 @@ attempts to find the global minimum of the Mean Squared Error.</p>
 term is shifted each iteration.</li>
 <li><strong>iterations</strong> (<em>int</em>) – The number of iterations of training to perform</li>
 <li><strong>train_bias</strong> (<em>bool</em>) – Flag to incorporate training of the Bias. Disabled by default.</li>
+<li><strong>reST_output</strong> (<em>bool</em>) – Flag to specify if reSTructured text output should be printed
+to stdout.</li>
 </ul>
 </td>
 </tr>
@@ -287,7 +300,7 @@ term is shifted each iteration.</li>
 
 <dl class="method">
 <dt id="NeuralNetwork.Network.Network.train_alternating">
-<code class="descname">train_alternating</code><span class="sig-paren">(</span><em>inputs: typing.List[typing.List[float]], desired: typing.List[float], gain_factor: float, iterations: int, train_bias: bool = False</em><span class="sig-paren">)</span><a class="headerlink" href="#NeuralNetwork.Network.Network.train_alternating" title="Permalink to this definition">¶</a></dt>
+<code class="descname">train_alternating</code><span class="sig-paren">(</span><em>inputs: typing.List[typing.List[float]], desired: typing.List[float], gain_factor: float, iterations: int, train_bias: bool = False, reST_output: bool = False</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#NeuralNetwork.Network.Network.train_alternating" title="Permalink to this definition">¶</a></dt>
 <dd><p>Train a neural network with multiple input/output pairs.</p>
 <p>Alternating training means that the input/output pairs will be used one after the other
 for the specified number of iterations. Given a set of inputs (I1, I2, I3…) and
@@ -304,6 +317,8 @@ for every of the specified iterations.</p>
 term is shifted each iteration.</li>
 <li><strong>iterations</strong> (<em>int</em>) – The number of iterations of training to perform</li>
 <li><strong>train_bias</strong> (<em>bool</em>) – Flag to incorporate training of the Bias. Disabled by default.</li>
+<li><strong>reST_output</strong> (<em>bool</em>) – Flag to specify if reSTructured text output should be printed
+to stdout.</li>
 </ul>
 </td>
 </tr>
@@ -313,7 +328,7 @@ term is shifted each iteration.</li>
 
 <dl class="method">
 <dt id="NeuralNetwork.Network.Network.train_round">
-<code class="descname">train_round</code><span class="sig-paren">(</span><em>inputs: typing.List[float], desired: float, gain_factor: float, train_bias: bool = False</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#NeuralNetwork.Network.Network.train_round" title="Permalink to this definition">¶</a></dt>
+<code class="descname">train_round</code><span class="sig-paren">(</span><em>inputs: typing.List[float], desired: float, gain_factor: float, train_bias: bool = False, reST_output: bool = False</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#NeuralNetwork.Network.Network.train_round" title="Permalink to this definition">¶</a></dt>
 <dd><p>Perform a single round of the Feed-Forward/Back-Propagation (FFBP) algorithm to train
 a Neural Network.</p>
 <p>The FFBP algorithm as two phases as the name implies.</p>
@@ -322,8 +337,8 @@ a Neural Network.</p>
 and the final output value is used to compute the error and the squared error.</p>
 <p>The Neural Network maps <span class="math">\(\mathbb{R}^n \rightarrow \mathbb{R}\)</span>. The input is a
 vector of real numbers and the output is a single real number. The difference between
-the actual output value and the expected output for a given set of inputs is the Error
-<span class="math">\(e\)</span>. The Mean Square Error, <span class="math">\(E = \frac{1}{2} e^2\)</span> is minimized using the
+the actual output value and the expected output for a given set of inputs is the error
+<span class="math">\(e\)</span>. The Sum Square Error, <span class="math">\(E = \frac{1}{2} e^2\)</span> is minimized using the
 Perceptron Delta Rule.</p>
 </li>
 <li><p class="first">In the Back-Propagation phase, the error values are then used to calculate changes in
@@ -344,6 +359,8 @@ the Neural Network until the weights of the first layer have been updated.</p>
 <li><strong>gain_factor</strong> (<em>float</em>) – The factor by which each successive weight
 term is shifted each iteration.</li>
 <li><strong>train_bias</strong> (<em>bool</em>) – Flag to incorporate training of the Bias.</li>
+<li><strong>reST_output</strong> (<em>bool</em>) – Flag to specify if reSTructured text output should be printed
+to stdout.</li>
 </ul>
 </td>
 </tr>
@@ -353,7 +370,7 @@ term is shifted each iteration.</li>
 
 <dl class="method">
 <dt id="NeuralNetwork.Network.Network.train_successive">
-<code class="descname">train_successive</code><span class="sig-paren">(</span><em>inputs: typing.List[typing.List[float]], desired: typing.List[float], gain_factor: float, iterations: int, train_bias: bool = False</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#NeuralNetwork.Network.Network.train_successive" title="Permalink to this definition">¶</a></dt>
+<code class="descname">train_successive</code><span class="sig-paren">(</span><em>inputs: typing.List[typing.List[float]], desired: typing.List[float], gain_factor: float, iterations: int, train_bias: bool = False, reST_output: bool = False</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#NeuralNetwork.Network.Network.train_successive" title="Permalink to this definition">¶</a></dt>
 <dd><p>Train a neural network with multiple input/output pairs.</p>
 <p>Successive training means that the input/output pairs will be used
 one at a time to train the neural network for the specified number of iterations
@@ -369,6 +386,8 @@ before moving on to the next input/output pair.</p>
 term is shifted each iteration.</li>
 <li><strong>iterations</strong> (<em>int</em>) – The number of iterations of training to perform for each input</li>
 <li><strong>train_bias</strong> (<em>bool</em>) – Flag to incorporate training of the Bias. Disabled by default.</li>
+<li><strong>reST_output</strong> (<em>bool</em>) – Flag to specify if reSTructured text output should be printed
+to stdout.</li>
 </ul>
 </td>
 </tr>
@@ -417,16 +436,6 @@ term is shifted each iteration.</li>
 </ul>
 
 
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <div><input type="text" name="q" /></div>
-      <div><input type="submit" value="Go" /></div>
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
       <div class="clearer"></div>
