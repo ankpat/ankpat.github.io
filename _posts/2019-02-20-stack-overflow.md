@@ -1,19 +1,41 @@
 ---
 layout: post
 title:  "Stack Buffer Overflows Explained"
-categories: vulnerability vulnerability-analysis buffer-overflow exploitation
+tags: [stack-buffer-overflow-series]
+---
+---
+{% for tag in site.tags %}
+  <h3>Stack Overflow Series</h3>
+  <ul>
+    {% assign count = '0' %}
+  
+    {% for post in tag[1] reversed %}
+        {% capture count %}{{ count | plus: '1' }}{% endcapture %}
+        <li>Part {{ count }} -
+        {% if page.url == post.url %}
+            {{post.title}} (This Article)
+        {% else %}
+            <a href="{{ post.url }}">{{ post.title }}</a>
+        {% endif %}
+        </li>
+    {% endfor %}
+  </ul>
+{% endfor %}
+
 ---
 
-A stack buffer overflow is a specific type of vulnerability that involves coercing an application to write more data than it was expecting into a specific memory location.
+A Stack Buffer Overflow is a surprisingly simple,
+yet common class class of software vulnerability - just look at the results for [Stack Buffer Overflow](https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=stack+buffer+overflow) in the CVE database.
+A stack buffer overflow comes down to forcing a program to write more data to a memory location than it had expected to write.
 
-At its core, a stack buffer overflow consists of forcing an application to write more data than it expected to write to a specific location.
-As part of that write beyond expected bounds (overflow), an attacker controls the data being written in hopes of altering program state or flow.
+A stack buffer overflow can be turned into an exploit if the act of writing more data than the program expected results in a change to the program's normal behavior.
 
-Consider a champagne glass.
+Let's illustrate how this works using booze!
+
+To keep things classy, let's work with champagne. Consider a champagne glass.
 It has a small, finite capacity of champagne that it can hold.
 Typically, when someone wants to drink out of a champagne glass, they fill the glass to almost full and then slowly drink from the glass.
 The person pouring the champagne knows that they need to fill the glass with champagne until it is almost completely full so they do not overflow and spill the bubbly goodness.    
-
 
 Now consider what happens when several champagne glasses are stacked in the form of an iconic champagne tower:
 
@@ -341,16 +363,13 @@ The overflow was large enough that it ***smashed the stack*** and overwrote the 
 Now, when the program goes to return from *strcpy*, it will read the value at stack address 0x10, 'aaaa', and try to jump to that location in program memory.
 The ASCII character 'a' maps to a value of '0x61', which means that the program will try to jump back to executing at address 0x61616161, which is most likely not the address of *Line 6*.
 
-## Defending Against Stack Buffer Overflows
+## Wrapping Up
 
-### Data Execution Prevention
-This mitigation prevents the processor from execution instructions from the program stack.
+When it comes to a lone champagne glass, an overflow is just wasteful, but when stacked into a tower, overflowing one glass is just plain awesome!
 
-# Hands-On
-@TODO: Build example
+When it comes to computer programs, having them do things they weren't written to do is far from ideal.
+Since stack buffer overflows could allow someone to force a program to do something it wasn't written to do, it's a pretty serious vulnerability class.
+In fact, security researches, compiler designers, and academics have spent years researching how to avoid and detect stack buffer overflows! *** SOURCES***
 
-@TODO: Gather screenshots of disassembly/decompilation
+In the next part of this series, we'll go into ways to turn a simple stack buffer overflow into a full blown software exploit and how such vulnerabilities are mitigated.
 
-@TODO: Demonstrate Proof of Concept Exploit
-
-@TODO: Describe mitigations and protections
