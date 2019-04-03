@@ -3,6 +3,7 @@ layout: post
 title:  "Stack Buffer Overflows Explained"
 tags: [stack-buffer-overflow-series]
 ---
+{% comment %}
 ---
 {% for tag in site.tags %}
   <h3>Stack Overflow Series</h3>
@@ -21,12 +22,18 @@ tags: [stack-buffer-overflow-series]
     {% endfor %}
   </ul>
 {% endfor %}
-
 ---
+{% endcomment %}
+
 
 A Stack Buffer Overflow is a surprisingly simple,
 yet common class class of software vulnerability - just look at the results for [Stack Buffer Overflow](https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=stack+buffer+overflow) in the CVE database.
 A stack buffer overflow comes down to forcing a program to write more data to a memory location than it had expected to write.
+
+A program needs to allocate space for any information it needs to store.
+This allocated space has a fixed size, kind of like how drinking glasses each have their own amount of liquid they can hold.
+A stack buffer overflow can be thought of as what happens when you try to pour a large coffee into a shot glass.
+Sure you'll fill the glass, but the overflow will cause quite the mess!
 
 A stack buffer overflow can be turned into an exploit if the act of writing more data than the program expected results in a change to the program's normal behavior.
 
@@ -48,11 +55,22 @@ While it is possible to fill each glass individually, there is a much more fun a
 2. Fill the top most glass with champagne.
 3. Don't stop pouring champagne into the top most glass until the glasses at the bottom of the tower are full.
 
-By exploiting the finite capacity of the champagne glass and the structure of the system, the champagne tower, it is possible to cause a subcomponent of the system to perform in a way you would like that it was not necessarily designed for.
+The overflow of the top-most glass is exploited to fill the glasses immediately below it.
+In turn, the overflow of the glasses in that layer is used to fill the layer below them until the final layer of the tower is full.
+
+To put it slightly more formally, the finite capacity of the champagne glass is exploited to force the glasses to overflow in a useful way.
+A finite storage unit is overflowed to force the system to behave in an unintended manner.
 In this case, the top-most glass ends up serving a purpose other than holding its capacity of champagne.
 
 This, in essence, is what a ***stack buffer overflow vulnerability*** takes advantage of within a computer program.
-Somewhere, there is a resource with a finite capacity that an attacker can fill beyond its capacity to make a component of the software system behave in a way that it had not been designed to do.
+Finding a stack buffer overflow boils down to finding a resource with a finite capacity that can be fill beyond its capacity to make a component of the software system behave in a way that it had not been designed to do.
+
+---
+
+* TOC
+{:toc}
+
+---
 
 ## Program Memory
 
