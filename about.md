@@ -32,13 +32,12 @@ When I have time to play around, I reall like exploring function programming lan
 
 <div style="text-align:center" markdown="1">
 
-[![Nissint Technologies](https://www.nissint.com/logo.png){:margin-right:"auto" :height="50%" width="50%"}](https://www.nissint.com)
+Graykey Labs @ Magnet Forensics
 
 </div>
 
-I am the Lead Cyber Engineer at [Nissint Technologies](https://www.nissint.com/).
-Working at Nissint means I can use my skills to do work that I'm truly passionate about.
+I am the Director of iOS Research at Magnet Forensics. I can use my skills to do work that I'm truly passionate about.
 
-If you like anything you've read here, you might also be interested in what we do at Nissint!
+If you like anything you've read here, you might also be interested in what we do at Magnet Forensics!
 
 [jekyll-organization]: https://github.com/jekyll
