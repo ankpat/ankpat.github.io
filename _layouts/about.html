@@ -1,0 +1,83 @@
+<html lang="{{ page.lang | default: site.lang | default: "en" }}">
+
+  {%- include head.html -%}
+
+  <body>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <h1 style="text-align:center"><a rel="author" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a></h1>
+        <hr/>
+        <hr/>
+        <h2 class="about-header"> {{ page.header }} </h2>
+        <hr/>
+        <hr/>
+        {{ content }}
+        <hr/>
+        <hr/>
+        {% if site.experience.size > 0 %}
+        <table>
+            <tr>
+                <th colspan=3><h2 class="about-header">Experience</h2></th>
+            </tr>
+            {% for exp in site.experience reversed %}
+            <tr class="experience-entry">
+                <td rowspan=3 class="experience-year">{{ exp.period }}</td>
+                <td>
+                    <h3 class="experience-employer">{{ exp.employer }}</h3>
+                </td>
+            </tr>
+            <tr>
+                <td><h4 class="experience-role"> {{exp.role}} </h4></td>
+            </tr>
+            <tr class="experience-content">
+                <td class="about-content">
+                    {{ exp.content | markdownify }}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+        {% if site.education.size > 0 %}
+        <table>
+            <tr class="about-header">
+                <th><h2>Education</h2></th>
+            </tr>
+
+            {% for edu in site.education reversed %}
+            <tr>
+                <td>
+                <h3> {{edu.school}} </h3>
+                <h4> {{edu.degree}}, {{edu.subject}} </h4>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+        {% if site.skills.size > 0 %}
+        <table>
+            <tr class="skills-header">
+                <th colspan="2"><h2>Skills</h2></th>
+            </tr>
+
+            {% for skill in site.skills reversed %}
+            <tr>
+                <td>
+                    <h3> {{skill.name}} </h3>
+                </td>
+                <td>
+                    {{skill.output}}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+        {% endif %}
+      </div>
+    </main>
+
+    {%- include footer.html -%}
+
+  </body>
+
+</html>
